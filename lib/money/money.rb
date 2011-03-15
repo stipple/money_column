@@ -14,7 +14,7 @@ class Money
   end
   
   def <=>(other)
-    cents <=> other.cents
+    cents <=> other.to_money.cents
   end
   
   def +(other)

@@ -147,7 +147,7 @@ describe Money do
   end
   
   it "should be comparable with non-money objects" do
-    @money.should_not == nil
+    (Money.new(1) > 0).should be_true
   end
   
   describe "frozen with amount of $1" do
