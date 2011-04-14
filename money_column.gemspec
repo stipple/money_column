@@ -6,11 +6,12 @@ Gem::Specification.new do |s|
   s.name        = "money_column"
   s.version     = MoneyColumn::VERSION
   s.platform    = Gem::Platform::RUBY
-  s.authors     = ["TODO: Write your name"]
-  s.email       = ["TODO: Write your email address"]
-  s.homepage    = ""
-  s.summary     = %q{TODO: Write a gem summary}
-  s.description = %q{TODO: Write a gem description}
+  s.authors     = ["Tobias Lütke"]
+  s.email       = ["tobi@shopify.com"]
+  s.homepage    = "http://blog.leetsoft.com"
+  s.summary     = %q{Simplifies dealing with money values in the database.}
+  s.description = %q{Rails plugin that makes handling of money values in the database convenient. On assignment the money column will
+ parse the input and apply heuristics to normalize oddball user input.}
 
   s.rubyforge_project = "money_column"
 
