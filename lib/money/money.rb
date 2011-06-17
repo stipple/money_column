@@ -6,10 +6,11 @@ class Money
   
   attr_reader :value, :cents
 
-  def initialize(value = 0)
+  def initialize(value = 0, options = {})
+    @decimal_places = options[:decimal_places] || 2
     raise ArgumentError if value.respond_to?(:nan?) && value.nan?
     
-    @value = value_to_decimal(value).round(2)
+    @value = value_to_decimal(value).round(@decimal_places)
     @cents = (@value * 100).to_i
   end
   
@@ -49,16 +50,16 @@ class Money
     value.hash
   end
   
-  def self.parse(input)
-    MoneyParser.parse(input)
+  def self.parse(input, options = {})
+    MoneyParser.parse(input, options)
   end
   
   def self.empty
     Money.new
   end
   
-  def self.from_cents(cents)
-    Money.new(cents.round.to_f / 100)
+  def self.from_cents(cents, options = {})
+    Money.new(cents.round.to_f / 100, options)
   end
   
   def to_money
@@ -79,7 +80,7 @@ class Money
   end
   
   def to_s
-    sprintf("%.2f", value.to_f)
+    sprintf("%.#{@decimal_places}f", value.to_f)
   end
   
   def to_liquid
@@ -91,7 +92,7 @@ class Money
   end
   
   def abs
-    Money.new(value.abs)
+    Money.new(value.abs, :decimal_places => @decimal_places)
   end
   
   private

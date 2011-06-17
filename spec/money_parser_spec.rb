@@ -42,6 +42,21 @@ describe MoneyParser do
       @parser.parse("10.00").should == Money.new(10.00)
     end
   
+    it "should parse a float string with three digits after the decimal" do
+      @parser.decimal_places = 3
+      @parser.parse("10.001", :decimal_places => 3).should == Money.new(10.001, :decimal_places => 3)
+    end
+  
+    it "should parse a float string with four digits after the decimal" do
+      @parser.decimal_places = 4
+      @parser.parse("10.0017").should == Money.new(10.0017)
+    end
+  
+    it "should parse a float string with five digits after the decimal" do
+      @parser.decimal_places = 5
+      @parser.parse("10.00172").should == Money.new(10.00172)
+    end
+  
     it "should parse the amount from an amount surrounded by whitespace and garbage" do
       @parser.parse("Rubbish $1.00 Rubbish").should == Money.new(1.00)
     end
