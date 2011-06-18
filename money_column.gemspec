@@ -2,6 +2,18 @@
 $:.push File.expand_path("../lib", __FILE__)
 require "money_column/version"
 
+files = ["README*", "LICENSE", "Gemfile", "init.rb", "Rakefile", "lib/**/*"].map do |glob|
+  Dir[glob]
+end.flatten
+
+test_files = ["spec/**/*"].map do |glob|
+  Dir[glob]
+end.flatten
+
+executable_files = ["bin/**/*"].map do |glob|
+  Dir[glob]
+end.flatten
+
 Gem::Specification.new do |s|
   s.name        = "money_column"
   s.version     = MoneyColumn::VERSION
@@ -15,9 +27,9 @@ Gem::Specification.new do |s|
 
   s.rubyforge_project = "money_column"
 
-  s.files         = `git ls-files`.split("\n")
-  s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
-  s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
+  s.files         = files
+  s.test_files    = test_files
+  s.executables   = executable_files
   s.require_paths = ["lib"]
 
   s.add_development_dependency "rspec", "~> 2"
