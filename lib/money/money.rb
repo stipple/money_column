@@ -62,7 +62,7 @@ class Money
     Money.new(cents.round.to_f / 100, options)
   end
   
-  def to_money
+  def to_money(decimal_places = 2)
     self
   end
   
