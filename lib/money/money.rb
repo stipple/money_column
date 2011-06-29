@@ -79,8 +79,8 @@ class Money
     value.to_f
   end
   
-  def to_s
-    sprintf("%.#{@decimal_places}f", value.to_f)
+  def to_s(places = @decimal_places)
+    sprintf("%.#{places}f", value.to_f)
   end
   
   def to_liquid
