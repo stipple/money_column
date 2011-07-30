@@ -17,7 +17,7 @@ module MoneyColumn
         end
         
         define_method("#{name}_before_type_cast") do
-          send(name) && sprintf("%.#{decimal_places}f", send(name))
+          send(name) && sprintf("%.#{decimal_places}f", read_attribute(name))
         end
         
         define_method("#{name}=") do |value|
