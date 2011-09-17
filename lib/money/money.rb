@@ -4,7 +4,7 @@ require 'bigdecimal/util'
 class Money
   include Comparable
   
-  attr_reader :value, :cents
+  attr_reader :value, :cents, :decimal_places
 
   def initialize(value = 0, options = {})
     @decimal_places = options[:decimal_places] || 2
@@ -19,11 +19,13 @@ class Money
   end
   
   def +(other)
-    Money.new(value + other.to_money.value)
+    o = other.to_money
+    Money.new(value + o.value, :decimal_places => [decimal_places, o.decimal_places].max)
   end
 
   def -(other)
-    Money.new(value - other.to_money.value)
+    o = other.to_money
+    Money.new(value - o.value, :decimal_places => [decimal_places, o.decimal_places].max)
   end
   
   def *(numeric)

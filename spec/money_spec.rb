@@ -54,6 +54,12 @@ describe Money do
     (Money.new(0.00) - Money.new(1.00)).should == Money.new("-1.00")
   end
   
+  it "should be addable with money with multiple decimal places" do
+    m = Money.new(1.225, :decimal_places => 5)
+    n = Money.new(1.224, :decimal_places => 5)
+    (m - n).should == Money.new(0.001, :decimal_places => 5)
+  end
+  
   it "should inspect to a presentable string" do
     @money.inspect.should == "#<Money value:0.00>"
   end
@@ -72,6 +78,16 @@ describe Money do
   
   it "should be addable with float" do
     (Money.new(1.33) + 1.50).should == Money.new(2.83)
+  end
+  
+  it "should be addable with money" do
+    (Money.new(1.33) + Money.new(1.50)).should == Money.new(2.83)
+  end
+  
+  it "should be addable with money with multiple decimal places" do
+    m = Money.new(1.225, :decimal_places => 5)
+    n = Money.new(1.224, :decimal_places => 5)
+    (m + n).should == Money.new(2.449, :decimal_places => 5)
   end
   
   it "should be multipliable with an integer" do
