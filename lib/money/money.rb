@@ -29,11 +29,11 @@ class Money
   end
   
   def *(numeric)
-    Money.new(value * numeric)
+    Money.new(value * numeric, :decimal_places => decimal_places)
   end
   
   def /(numeric)
-    Money.new(value / numeric)
+    Money.new(value / numeric, :decimal_places => decimal_places)
   end
     
   def inspect

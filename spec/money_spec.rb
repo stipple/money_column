@@ -106,6 +106,10 @@ describe Money do
     (Money.new(24.00) * (1 / 30.0)).should == Money.new(0.80)
   end
   
+  it "should be multipliable without loss of precision for multiple decimal places" do
+    (Money.new(1.2225, :decimal_places => 5) * 2).should == Money.new(2.445, :decimal_places => 5)
+  end
+  
   it "should round multiplication result with fractional penny of 5 or higher up" do
     (Money.new(0.03) * 0.5).should == Money.new(0.02)
   end
@@ -122,6 +126,10 @@ describe Money do
     (Money.new(2.00) / 2).should == Money.new(1.00)
   end
   
+  it "should be divisiable with multiple decimal places" do
+    (Money.new(2.225, :decimal_places => 5) / 10).should == Money.new(0.2225, :decimal_places => 5)
+  end
+
   it "should round to the lowest cent value during division" do
     (Money.new(2.00) / 3).should == Money.new(0.67)
   end
