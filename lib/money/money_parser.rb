@@ -13,7 +13,7 @@ class MoneyParser
   end
   
   def parse(input, options = {})
-    Money.new(extract_money(input), options)
+    McMoney.new(extract_money(input), options)
   end
   
   private

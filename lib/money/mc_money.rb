@@ -1,7 +1,7 @@
 require 'bigdecimal'
 require 'bigdecimal/util'
 
-class Money
+class McMoney
   include Comparable
   
   attr_reader :value, :cents, :decimal_places
@@ -20,20 +20,20 @@ class Money
   
   def +(other)
     o = other.to_money
-    Money.new(value + o.value, :decimal_places => [decimal_places, o.decimal_places].max)
+    McMoney.new(value + o.value, :decimal_places => [decimal_places, o.decimal_places].max)
   end
 
   def -(other)
     o = other.to_money
-    Money.new(value - o.value, :decimal_places => [decimal_places, o.decimal_places].max)
+    McMoney.new(value - o.value, :decimal_places => [decimal_places, o.decimal_places].max)
   end
   
   def *(numeric)
-    Money.new(value * numeric, :decimal_places => decimal_places)
+    McMoney.new(value * numeric, :decimal_places => decimal_places)
   end
   
   def /(numeric)
-    Money.new(value / numeric, :decimal_places => decimal_places)
+    McMoney.new(value / numeric, :decimal_places => decimal_places)
   end
     
   def inspect
@@ -57,11 +57,11 @@ class Money
   end
   
   def self.empty
-    Money.new
+    McMoney.new
   end
   
   def self.from_cents(cents, options = {})
-    Money.new(cents.round.to_f / 100, options)
+    McMoney.new(cents.round.to_f / 100, options)
   end
   
   def to_money(decimal_places = 2)
@@ -94,7 +94,7 @@ class Money
   end
   
   def abs
-    Money.new(value.abs, :decimal_places => @decimal_places)
+    McMoney.new(value.abs, :decimal_places => @decimal_places)
   end
   
   private

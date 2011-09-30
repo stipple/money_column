@@ -13,7 +13,7 @@ module MoneyColumn
       [columns].flatten.each do |name|
         define_method(name) do
           value = read_attribute(name)
-          value.blank? ? nil : Money.new(read_attribute(name), options)
+          value.blank? ? nil : McMoney.new(read_attribute(name), options)
         end
         
         define_method("#{name}_before_type_cast") do

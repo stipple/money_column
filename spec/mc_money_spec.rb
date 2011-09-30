@@ -1,13 +1,13 @@
 require File.dirname(__FILE__) + '/spec_helper'
 
-describe Money do
+describe McMoney do
   
   before(:each) do
-    @money = Money.new
+    @money = McMoney.new
   end
   
   it "should be contructable with empty class method" do
-    Money.empty.should == @money
+    McMoney.empty.should == @money
   end
   
   it "should return itself with to_money" do
@@ -15,7 +15,7 @@ describe Money do
   end
   
   it "should default to 0 when constructed with no arguments" do
-    @money.should == Money.new(0.00)
+    @money.should == McMoney.new(0.00)
   end
   
   it "should to_s as a float with 2 decimal places" do
@@ -23,195 +23,195 @@ describe Money do
   end
   
   it "should be constructable with a BigDecimal" do
-    Money.new(BigDecimal.new("1.23")).should == Money.new(1.23)
+    McMoney.new(BigDecimal.new("1.23")).should == McMoney.new(1.23)
   end
   
   it "should be constructable with a Fixnum" do
-    Money.new(3).should == Money.new(3.00)
+    McMoney.new(3).should == McMoney.new(3.00)
   end
   
   it "should be construcatable with a Float" do
-    Money.new(3.00).should == Money.new(3.00)
+    McMoney.new(3.00).should == McMoney.new(3.00)
   end
   
   it "should be addable" do
-    (Money.new(1.51) + Money.new(3.49)).should == Money.new(5.00)
+    (McMoney.new(1.51) + McMoney.new(3.49)).should == McMoney.new(5.00)
   end
   
   it "should be able to add $0 + $0" do
-    (Money.new + Money.new).should == Money.new
+    (McMoney.new + McMoney.new).should == McMoney.new
   end
   
   it "should be subtractable" do
-    (Money.new(5.00) - Money.new(3.49)).should == Money.new(1.51)
+    (McMoney.new(5.00) - McMoney.new(3.49)).should == McMoney.new(1.51)
   end
   
   it "should be subtractable to $0" do
-    (Money.new(5.00) - Money.new(5.00)).should == Money.new
+    (McMoney.new(5.00) - McMoney.new(5.00)).should == McMoney.new
   end
   
   it "should be substractable to a negative amount" do
-    (Money.new(0.00) - Money.new(1.00)).should == Money.new("-1.00")
+    (McMoney.new(0.00) - McMoney.new(1.00)).should == McMoney.new("-1.00")
   end
   
   it "should be addable with money with multiple decimal places" do
-    m = Money.new(1.225, :decimal_places => 5)
-    n = Money.new(1.224, :decimal_places => 5)
-    (m - n).should == Money.new(0.001, :decimal_places => 5)
+    m = McMoney.new(1.225, :decimal_places => 5)
+    n = McMoney.new(1.224, :decimal_places => 5)
+    (m - n).should == McMoney.new(0.001, :decimal_places => 5)
   end
   
   it "should inspect to a presentable string" do
-    @money.inspect.should == "#<Money value:0.00>"
+    @money.inspect.should == "#<McMoney value:0.00>"
   end
   
   it "should be inspectable within an array" do
-    [@money].inspect.should == "[#<Money value:0.00>]"
+    [@money].inspect.should == "[#<McMoney value:0.00>]"
   end
   
   it "should correctly support eql? as a value object" do
-    @money.should eql(Money.new)
+    @money.should eql(McMoney.new)
   end
   
   it "should be addable with integer" do
-    (Money.new(1.33) + 1).should == Money.new(2.33)
+    (McMoney.new(1.33) + 1).should == McMoney.new(2.33)
   end
   
   it "should be addable with float" do
-    (Money.new(1.33) + 1.50).should == Money.new(2.83)
+    (McMoney.new(1.33) + 1.50).should == McMoney.new(2.83)
   end
   
   it "should be addable with money" do
-    (Money.new(1.33) + Money.new(1.50)).should == Money.new(2.83)
+    (McMoney.new(1.33) + McMoney.new(1.50)).should == McMoney.new(2.83)
   end
   
   it "should be addable with money with multiple decimal places" do
-    m = Money.new(1.225, :decimal_places => 5)
-    n = Money.new(1.224, :decimal_places => 5)
-    (m + n).should == Money.new(2.449, :decimal_places => 5)
+    m = McMoney.new(1.225, :decimal_places => 5)
+    n = McMoney.new(1.224, :decimal_places => 5)
+    (m + n).should == McMoney.new(2.449, :decimal_places => 5)
   end
   
   it "should be multipliable with an integer" do
-    (Money.new(1.00) * 55).should == Money.new(55.00)
+    (McMoney.new(1.00) * 55).should == McMoney.new(55.00)
   end
   
   it "should be multiplable with a float" do
-    (Money.new(1.00) * 1.50).should == Money.new(1.50)
+    (McMoney.new(1.00) * 1.50).should == McMoney.new(1.50)
   end
   
   it "should be multipliable by a cents amount" do
-    (Money.new(1.00) * 0.50).should == Money.new(0.50)
+    (McMoney.new(1.00) * 0.50).should == McMoney.new(0.50)
   end
   
   it "should be multipliable by a repeatable floating point number" do
-    (Money.new(24.00) * (1 / 30.0)).should == Money.new(0.80)
+    (McMoney.new(24.00) * (1 / 30.0)).should == McMoney.new(0.80)
   end
   
   it "should be multipliable without loss of precision for multiple decimal places" do
-    (Money.new(1.2225, :decimal_places => 5) * 2).should == Money.new(2.445, :decimal_places => 5)
+    (McMoney.new(1.2225, :decimal_places => 5) * 2).should == McMoney.new(2.445, :decimal_places => 5)
   end
   
   it "should round multiplication result with fractional penny of 5 or higher up" do
-    (Money.new(0.03) * 0.5).should == Money.new(0.02)
+    (McMoney.new(0.03) * 0.5).should == McMoney.new(0.02)
   end
   
   it "should round multiplication result with fractional penny of 4 or lower down" do
-    (Money.new(0.10) * 0.33).should == Money.new(0.03)
+    (McMoney.new(0.10) * 0.33).should == McMoney.new(0.03)
   end
   
   it "should be divisible by a fixnum" do
-    (Money.new(55.00) / 55).should == Money.new(1.00)
+    (McMoney.new(55.00) / 55).should == McMoney.new(1.00)
   end
 
   it "should be divisible by an integer" do
-    (Money.new(2.00) / 2).should == Money.new(1.00)
+    (McMoney.new(2.00) / 2).should == McMoney.new(1.00)
   end
   
   it "should be divisiable with multiple decimal places" do
-    (Money.new(2.225, :decimal_places => 5) / 10).should == Money.new(0.2225, :decimal_places => 5)
+    (McMoney.new(2.225, :decimal_places => 5) / 10).should == McMoney.new(0.2225, :decimal_places => 5)
   end
 
   it "should round to the lowest cent value during division" do
-    (Money.new(2.00) / 3).should == Money.new(0.67)
+    (McMoney.new(2.00) / 3).should == McMoney.new(0.67)
   end
   
   it "should return cents in to_liquid" do
-    Money.new(1.00).to_liquid.should == 100
+    McMoney.new(1.00).to_liquid.should == 100
   end
   
   it "should return cents in to_json" do
-    Money.new(1.00).to_liquid.should == 100
+    McMoney.new(1.00).to_liquid.should == 100
   end
   
   it "should support absolute value" do
-    Money.new(-1.00).abs.should == Money.new(1.00)
+    McMoney.new(-1.00).abs.should == McMoney.new(1.00)
   end
   
   it "should support to_i" do
-    Money.new(1.50).to_i.should == 1
+    McMoney.new(1.50).to_i.should == 1
   end
   
   it "should support to_f" do
-    Money.new(1.50).to_f.to_s.should == "1.5"
+    McMoney.new(1.50).to_f.to_s.should == "1.5"
   end
   
   it "should be creatable from an integer value in cents" do
-    Money.from_cents(1950).should == Money.new(19.50)
+    McMoney.from_cents(1950).should == McMoney.new(19.50)
   end
   
   it "should be creatable from an integer value of 0 in cents" do
-    Money.from_cents(0).should == Money.new
+    McMoney.from_cents(0).should == McMoney.new
   end
   
   it "should be creatable from a float cents amount" do
-    Money.from_cents(1950.5).should == Money.new(19.51)
+    McMoney.from_cents(1950.5).should == McMoney.new(19.51)
   end
   
   it "should raise when constructed with a NaN value" do
-    lambda{ Money.new( 0.0 / 0) }.should raise_error
+    lambda{ McMoney.new( 0.0 / 0) }.should raise_error
   end
   
   it "should be comparable with non-money objects" do
-    (Money.new(1) > 0).should be_true
+    (McMoney.new(1) > 0).should be_true
   end
   
   describe "frozen with amount of $1" do
     before(:each) do
-      @money = Money.new(1.00).freeze
+      @money = McMoney.new(1.00).freeze
     end
 
     it "should == $1" do
-      @money.should == Money.new(1.00)
+      @money.should == McMoney.new(1.00)
     end
     
     it "should not == $2" do
-      @money.should_not == Money.new(2.00)
+      @money.should_not == McMoney.new(2.00)
     end
     
     it "<=> $1 should be 0" do
-      (@money <=> Money.new(1.00)).should == 0
+      (@money <=> McMoney.new(1.00)).should == 0
     end
     
     it "<=> $2 should be -1" do
-      (@money <=> Money.new(2.00)).should == -1
+      (@money <=> McMoney.new(2.00)).should == -1
     end
     
     it "<=> $0.50 should equal 1" do
-      (@money <=> Money.new(0.50)).should == 1
+      (@money <=> McMoney.new(0.50)).should == 1
     end
     
     it "should have the same hash value as $1" do
-      @money.hash.should == Money.new(1.00).hash
+      @money.hash.should == McMoney.new(1.00).hash
     end
     
     it "should not have the same hash value as $2" do
-      @money.hash.should == Money.new(1.00).hash
+      @money.hash.should == McMoney.new(1.00).hash
     end
 
   end
   
   describe "with amount of $0" do
     before(:each) do
-      @money = Money.new
+      @money = McMoney.new
     end
     
     it "should be zero" do
@@ -219,25 +219,25 @@ describe Money do
     end
     
     it "should be greater than -$1" do
-      @money.should be > Money.new("-1.00")
+      @money.should be > McMoney.new("-1.00")
     end
     
     it "should be greater than or equal to $0" do
-      @money.should be >= Money.new
+      @money.should be >= McMoney.new
     end
     
     it "should be less than or equal to $0" do
-      @money.should be <= Money.new
+      @money.should be <= McMoney.new
     end
     
     it "should be less than $1" do
-      @money.should be < Money.new(1.00)
+      @money.should be < McMoney.new(1.00)
     end
   end
 
   describe "with amount of $1" do
     before(:each) do
-      @money = Money.new(1.00)
+      @money = McMoney.new(1.00)
     end
     
     it "should not be zero" do
@@ -257,21 +257,21 @@ describe Money do
     end
     
     it "should be greater than $0" do
-      @money.should be > Money.new(0.00)
+      @money.should be > McMoney.new(0.00)
     end
     
     it "should be less than $2" do
-      @money.should be < Money.new(2.00)
+      @money.should be < McMoney.new(2.00)
     end
     
     it "should be equal to $1" do
-      @money.should == Money.new(1.00)
+      @money.should == McMoney.new(1.00)
     end
   end
   
   describe "with amount of $1 with created with 3 decimal places" do
     before(:each) do
-      @money = Money.new(1.125)
+      @money = McMoney.new(1.125)
     end
     
     it "should round 3rd decimal place" do
