@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
   s.name        = "money_column"
   s.version     = MoneyColumn::VERSION
   s.platform    = Gem::Platform::RUBY
-  s.authors     = ["Tobias Lütke", "Michael Dungan"]
+  s.authors     = ["Tobias Lutke", "Michael Dungan"]
   s.email       = ["tobi@shopify.com", "mpd@stippleit.com"]
   s.homepage    = "http://blog.leetsoft.com"
   s.summary     = %q{Simplifies dealing with money values in the database.}
