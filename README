@@ -1,9 +1,9 @@
 = Money Column
 
 Rails plugin that makes handling of money values in the database convenient. On assignment the money column will
-parse the input and apply heuristics to normalize oddball user input. 
+parse the input and apply heuristics to normalize oddball user input.
 
-Extracted from Shopify and has seen years of production use. 
+Extracted from Shopify and has seen years of production use.
 
 = Example use
 
@@ -16,7 +16,7 @@ Extracted from Shopify and has seen years of production use.
 
 = Database
 
-All money values need to be declared as decimal columns. Just go for it. It will safe you from a world of trouble. 
+All money values need to be declared as decimal columns. Just go for it. It will safe you from a world of trouble.
 
   create_table "products" do |t|
     t.string   "title"

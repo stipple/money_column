@@ -1,10 +1,10 @@
 module MoneyColumn
   def self.included(base)
     base.extend(ClassMethods)
-  end                   
-  
+  end
+
   module ClassMethods
-    
+
     def money_column(*columns)
       options = columns.extract_options! || {}
 
@@ -15,11 +15,11 @@ module MoneyColumn
           value = read_attribute(name)
           value.blank? ? nil : McMoney.new(read_attribute(name), options)
         end
-        
+
         define_method("#{name}_before_type_cast") do
           send(name) && sprintf("%.#{decimal_places}f", read_attribute(name))
         end
-        
+
         define_method("#{name}=") do |value|
           if value.blank?
             write_attribute(name, nil)
@@ -29,7 +29,7 @@ module MoneyColumn
             write_attribute(name, money.value)
             money
           end
-        end        
+        end
       end
     end
   end
