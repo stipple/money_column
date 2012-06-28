@@ -1,3 +1,3 @@
-require File.dirname(__FILE__) + '/mc_money/mc_money'
-require File.dirname(__FILE__) + '/mc_money/money_parser'
-require File.dirname(__FILE__) + '/mc_money/core_extensions'
+require File.expand_path('../mc_money/mc_money', __FILE__)
+require File.expand_path('../mc_money/money_parser', __FILE__)
+require File.expand_path('../mc_money/core_extensions', __FILE__)
